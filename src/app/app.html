@@ -1,18 +1,3 @@
-<h1>
-  my new angular project
-</h1>
-
-<i class="fa-solid fa-user"></i>
-
-<!-- <p *ngIf="is_prod; else devTemplate">PROD</p>
-<ng-template #devTemplate>Dev</ng-template> -->
-
-<p>
-  @if (is_prod) {
-  <p>PROD</p>
-} @else {
-  <p>Dev</p>
-}
-</p>
-
-<ng-template #devTemplate>Dev</ng-template>
+<div>
+  <router-outlet></router-outlet>
+</div>
