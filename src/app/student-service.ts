@@ -23,4 +23,18 @@ export class StudentService {
   getAllStudent():Observable<Student[]> {
     return this.httpClient.get<Student[]>(this.link)
   }
+
+getStudentById(id:Number):Observable<Student>{
+  return this.httpClient.get<Student>(this.link+id)
+}
+addStudent(student:Student):Observable<Student>{
+  return this.httpClient.post<Student>(this.link, student)
+}
+updateStudent(id:Number, student:Student){
+  return this.httpClient.put<Student>(this.link+id, student)
+}
+deleteStudent(id:Number): Observable<String>{
+  return this.httpClient.delete<String>(this.link+id)
+}
+
 }
