@@ -1,1 +1,18 @@
-<p>student-list works!</p>
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Average</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (student of students; track student.id) {
+  <tr>
+    <td>{{ student.id }}</td>
+    <td>{{ student.name }}</td>
+    <td>{{ student.average }}</td>
+  </tr>
+}
+  </tbody>
+</table>
