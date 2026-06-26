@@ -5,21 +5,47 @@
   </a>
 </h2>
 
-<table>
+<div *ngIf="isLoading" class="text-center py-4">
+  Loading students...
+  <p class="text-sm text-gray-500 mt-2">Connecting to http://localhost:9090/students/</p>
+</div>
+
+<div *ngIf="errorMessage" class="text-red-600 bg-red-100 p-4 rounded mb-4">
+  <strong>Error:</strong> {{ errorMessage }}
+  <p class="text-sm mt-2">Check the browser console (F12) for more details</p>
+  <button (click)="getAllStudent()" class="ml-4 mt-2 bg-blue-600 text-white px-4 py-2 rounded">Retry</button>
+</div>
+
+<div *ngIf="!isLoading && students && students.length === 0 && !errorMessage" class="text-center py-4">
+  No students found. <a href="/students/addstudent">Add a student</a>
+</div>
+
+<!-- Debug Info -->
+<div class="text-sm text-gray-600 mb-4" *ngIf="!isLoading">
+  Found {{ students?.length || 0 }} student(s)
+</div>
+
+<table *ngIf="!isLoading && students && students.length > 0" class="w-full border-collapse border border-gray-300">
   <thead>
-    <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Average</th>
+    <tr class="bg-gray-100">
+      <th class="border border-gray-300 p-2">Id</th>
+      <th class="border border-gray-300 p-2">Name</th>
+      <th class="border border-gray-300 p-2">Average</th>
     </tr>
   </thead>
   <tbody>
     @for (student of students; track student.id) {
-  <tr>
-    <td>{{ student.id }}</td>
-    <td>{{ student.name }}</td>
-    <td>{{ student.average }}</td>
-  </tr>
-}
+    <tr>
+      <td class="border border-gray-300 p-2">{{ student.id }}</td>
+      <td class="border border-gray-300 p-2">{{ student.name }}</td>
+      <td class="border border-gray-300 p-2">{{ student.average }}</td>
+      <td class="einteractivehover">
+        <a href="/students/updatestudent/{{student.id}}">
+          <i class="fa fa-pencil"></i>
+        </a>
+      </td>
+    </tr>
+    }
   </tbody>
 </table>
+
